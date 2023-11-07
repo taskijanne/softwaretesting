@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import toNumber from '../src/toNumber.js';
 
-describe('toNumber', () => {
+describe('toNumber.js general tests', () => {
   it('should return a number when value is already a number', () => {
     assert.strictEqual(toNumber(3.2), 3.2);
     assert.strictEqual(toNumber(Number.MIN_VALUE), 5e-324);
@@ -30,12 +30,46 @@ describe('toNumber', () => {
     assert.strictEqual(toNumber('  42 '), 42);
     assert.strictEqual(toNumber('0b1010'), 10);
     assert.strictEqual(toNumber('0o755'), 493);
-    assert.strictEqual(toNumber('-0x1A'), -26);
+    assert.strictEqual(toNumber('0x1A'), 26);
   });
 
   it('should return 0 for empty or non-numeric strings', () => {
     assert.strictEqual(toNumber(''), 0);
-    assert.strictEqual(toNumber('abc'), 0);
-    assert.strictEqual(toNumber('0xinvalid'), 0);
+    assert.isTrue(isNaN(toNumber('abc')));
+    assert.isTrue(isNaN(toNumber('0xinvalid')));
+    assert.isTrue(isNaN(toNumber('-0x1A')));
+  });  
+});
+
+describe('toNumber.js business logic tests', () => {
+
+  const product1 = {
+    name: "Tomato",
+    price: "1.50"
+  };
+
+  const product2 = {
+    name: "Tomato",
+    price: undefined
+  };
+
+  const product3 = {
+    name: "Tomato"
+  };  
+
+  const product4 = {
+    name: "Tomato",
+    price: "one million euros"
+  };
+
+  it('should convert products price to number if products price is represented as string', () => {
+    assert.strictEqual(toNumber(product1.price), 1.5);
   });
+  
+  it('should not convert undefined price to number', () => {
+    assert.isTrue(isNaN(toNumber(product2.price)));
+    assert.isTrue(isNaN(toNumber(product3.price)));
+    assert.isTrue(isNaN(toNumber(product4.price)));
+  });
+
 });
