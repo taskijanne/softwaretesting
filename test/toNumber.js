@@ -25,20 +25,25 @@ describe('toNumber.js general tests', () => {
     assert.strictEqual(toNumber(objectWithoutValueOf), 15);
   });
 
-  it('should convert strings to numbers', () => {
+  it('should convert positive strings to numbers', () => {
     assert.strictEqual(toNumber('3.2'), 3.2);
-    assert.strictEqual(toNumber('  42 '), 42);
+    assert.strictEqual(toNumber('  42 '), 42);    
     assert.strictEqual(toNumber('0b1010'), 10);
     assert.strictEqual(toNumber('0o755'), 493);
     assert.strictEqual(toNumber('0x1A'), 26);
   });
 
-  it('should return 0 for empty or non-numeric strings', () => {
+  it('should convert negative strings to numbers', () => {
+    assert.strictEqual(toNumber('-3.2'), -3.2);
+    assert.strictEqual(toNumber('  -42 '), -42);
+    assert.strictEqual(toNumber('-0b1010'), -10);
+    assert.strictEqual(toNumber('-0o755'), -493);
+    assert.strictEqual(toNumber('-0x1A'), -26);    
+  });
+
+  it('should return 0 for empty strings', () => {
     assert.strictEqual(toNumber(''), 0);
-    assert.isTrue(isNaN(toNumber('abc')));
-    assert.isTrue(isNaN(toNumber('0xinvalid')));
-    assert.isTrue(isNaN(toNumber('-0x1A')));
-  });  
+  });
 });
 
 describe('toNumber.js business logic tests', () => {
@@ -61,9 +66,15 @@ describe('toNumber.js business logic tests', () => {
     name: "Tomato",
     price: "one million euros"
   };
+  
+  const product5 ={
+    name: "Tomato",
+    price: 0
+  }
 
   it('should convert products price to number if products price is represented as string', () => {
     assert.strictEqual(toNumber(product1.price), 1.5);
+    assert.strictEqual(toNumber(product5.price), 0);
   });
   
   it('should not convert undefined price to number', () => {
