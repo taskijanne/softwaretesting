@@ -16,7 +16,7 @@ describe('get.js general tests', () => {
   it('should return undefined for non-existing properties', () => {
     const object = { 'a': { 'b': { 'c': 3 } } };
     assert.isUndefined(get(object, 'x.y.z'));
-  });  
+  });
 });
 
 

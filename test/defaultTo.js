@@ -10,7 +10,8 @@ describe('defaultTo.js general tests', () => {
 
   it('should return the defaultValue if the value is NaN, null, or undefined', () => {
     assert.strictEqual(defaultTo(undefined, 10), 10);
-    assert.strictEqual(defaultTo(null, 'Default'), 'Default');   
+    assert.strictEqual(defaultTo(null, 'Default'), 'Default'); 
+    assert.strictEqual(defaultTo(NaN, 42), 42);  
   });
 });
 
@@ -25,21 +26,28 @@ describe('defaultTo.js business logic tests', () => {
   */
   const product1 = {
     productName: "tomato",
-    displayName: "Most fresh tomato in the planet!"
+    displayName: "Most fresh tomato in the planet!",
+    price: 4,
+    discountedPrice: 3,
   }
 
   const product2 = {
     productName: "tomato",
-    displayName: null
+    displayName: null,
+    price: 4
   }
 
   const product3 = {
     productName: "tomato",
-    displayName: undefined
+    displayName: undefined,
+    price: 4,
+    discountedPrice: NaN
   }
 
   const product4 = {
-    productName: "tomato"
+    productName: "tomato",
+    price: 4,
+    discountedPrice: null
   }
 
   it('should use products displayName instead of productName if displayName is defined', () => {
@@ -52,4 +60,19 @@ describe('defaultTo.js business logic tests', () => {
     assert.strictEqual(defaultTo(product4.displayName, product4.productName), product4.productName);
   });
 
+  it('should use discounted price instead of normal price when discounted price is defined', () => {
+    assert.strictEqual(defaultTo(product1.discountedPrice, product1.price), 3);
+  });
+
+  it('should use normal price when discounted price is undefined', () => {
+    assert.strictEqual(defaultTo(product2.discountedPrice, product2.price), 4);
+  });
+
+  it('should use normal price when discounted price is NaN', () => {
+    assert.strictEqual(defaultTo(product3.discountedPrice, product3.price), 4);
+  });
+
+  it('should use normal price when discounted price is null', () => {
+    assert.strictEqual(defaultTo(product4.discountedPrice, product4.price), 4);
+  });
 });

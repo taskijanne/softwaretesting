@@ -3,7 +3,6 @@ import toString from '../src/toString.js';
 
 describe('toString.js general tests', () => {
   it('should convert values to strings', () => {
-   // assert.strictEqual(toString(null), ''); Doesn't work but it should according to spec..
     assert.strictEqual(toString(-0), '-0');
     assert.strictEqual(toString([1, 2, 3]), '1,2,3');
   });
@@ -20,6 +19,10 @@ describe('toString.js general tests', () => {
   it('should preserve the sign of -0', () => {
     assert.strictEqual(toString(-0), '-0');
     assert.strictEqual(toString(0), '0');
+  });
+
+  it('should convert null value to empty string', () => {
+    assert.strictEqual(toString(null), '');
   });
 });
 
