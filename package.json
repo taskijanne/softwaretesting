@@ -5,12 +5,17 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coverage": "c8 mocha"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "chai": "^4.3.8",
     "mocha": "^10.2.0"
+  },
+  "devDependencies": {
+    "c8": "^8.0.1",
+    "chai": "^4.3.10",
+    "nyc": "^15.1.0"
   }
 }
