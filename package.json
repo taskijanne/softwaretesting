@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha",
-    "coverage": "c8 mocha"
+    "test": "c8 mocha"
   },
   "author": "",
   "license": "MIT",
