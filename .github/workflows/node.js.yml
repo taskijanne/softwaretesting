@@ -29,9 +29,8 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-
     - name: Install Coveralls
       run: npm install coveralls --no-save
 
     - name: Send coverage to Coveralls
-      run: npx coveralls
+      run: npm run coverage

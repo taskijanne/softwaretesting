@@ -21,8 +21,9 @@
     "nyc": "^15.1.0"
   },
   "nyc": {
+    "all": true,
     "include": [
-      "src/**/*.js"
+      "src/*.js"
     ]
 }
 }
