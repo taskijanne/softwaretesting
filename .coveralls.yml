@@ -1,0 +1,2 @@
+service_name: github
+repo_toke: $COVERALLS_REPO_TOKEN
