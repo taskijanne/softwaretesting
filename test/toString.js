@@ -24,6 +24,10 @@ describe('toString.js general tests', () => {
   it('should convert null value to empty string', () => {
     assert.strictEqual(toString(null), '');
   });
+
+  it('should convert undefined value to empty string', () => {
+    assert.strictEqual(toString(undefined), '');
+  });
 });
 
 
