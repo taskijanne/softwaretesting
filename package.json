@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "mocha",
-    "test-c8-html": "c8 --include=src/*.js --reporter=html mocha && return 1",
+    "test-c8-html": "c8 --include=src/*.js --reporter=html mocha",
     "test-c8-coveralls": "c8 report --include=src/*.js --reporter=text-lcov | coveralls"
   },
   "author": "",
