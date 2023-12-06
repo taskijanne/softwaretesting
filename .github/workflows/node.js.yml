@@ -32,6 +32,11 @@ jobs:
       run: npm install coveralls --no-save
 
     - name: Run tests
-      run: npm run test-c8-html || true
-    - name: Send coverage to Coveralls
-      run: npm run test-c8-coveralls      
+      run: npm run test-c8-lcov || true
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@v2.2.3
+      with: 
+        github-token: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        file: lcov/lcof.info
+        format: lcov
+            
