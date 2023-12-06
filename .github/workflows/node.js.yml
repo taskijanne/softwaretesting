@@ -31,6 +31,7 @@ jobs:
     - name: Install Coveralls
       run: npm install coveralls --no-save
 
-    - name: Send coverage to Coveralls
+    - name: Run tests
       run: npm run test-c8-html
+    - name: Send coverage to Coveralls
       run: npm run test-c8-coveralls      
