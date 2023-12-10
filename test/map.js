@@ -15,4 +15,28 @@ describe('map.js general tests', () => {
 
         expect(() => map(priceArray, discount).to.deep.equal([9, 18, 45]));
     });
+
+    it('maps array elements using a function that adds 1', () => {
+        function addOne(n) {
+          return n + 1;
+        }
+    
+        const inputArray = [1, 2, 3];
+        const expectedResult = [2, 3, 4];
+    
+        const result = map(inputArray, addOne);
+    
+        expect(result).to.deep.equal(expectedResult);
+      });
+    
+      it('returns an empty array for an empty input array', () => {
+        function identity(n) {
+          return n;
+        }
+    
+        const inputArray = [];
+        const result = map(inputArray, identity);
+    
+        expect(result).to.deep.equal([]);
+      });
 });
